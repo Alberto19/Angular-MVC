@@ -17,7 +17,7 @@ module.exports  = function(app) {
         
 
     // habilitando HTML5MODE
-    app.all('/*', function(req, res) {
+    app.all('/*.php', function(req, res) {
         res.sendFile(path.resolve('public/index.html'));
     });
 };

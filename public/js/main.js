@@ -1,4 +1,4 @@
-angular.module('main', ['minhasDiretivas','ngAnimate','ngRoute', 'ngResource'])
+angular.module('main', ['minhasDiretivas','ngAnimate','ngRoute','ngResource', 'meusServicos'])
 .config(function($routeProvider, $locationProvider){
 
     $locationProvider.html5Mode(true);

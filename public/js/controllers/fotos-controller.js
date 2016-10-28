@@ -1,11 +1,10 @@
 angular.module('main').controller('FotosController',
- function($scope, $http, $resource){
+ function($scope,recursoFoto){
 
 	$scope.fotos = [];
 	$scope.filtro = '';
 	$scope.mensagem = '';
 
-	var recursoFoto = $resource('v1/fotos/:fotoId');
 	recursoFoto.query(function(fotos){
 		$scope.fotos = fotos;
 	}, function(erro){

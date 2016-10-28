@@ -1,5 +1,5 @@
 angular.module('main').controller('FotoController',
- function($scope, recursoFoto, $routeParams){
+ function($scope, cadastroDeFotos,recursoFoto, $routeParams){
 
 	$scope.foto = {};
     $scope.mensagem = '';
@@ -15,23 +15,14 @@ angular.module('main').controller('FotoController',
 
 	$scope.submeter = function(){
         if($scope.formulario.$valid){
-			if($scope.foto._id){
-				recursoFoto.update({fotoId: $scope.foto._id}, $scope.foto, function(){
-					$scope.foto ={};
-					$scope.mensagem = 'Foto alterada com sucesso';
-				}, function(erro){
-					$scope.mensagem = 'Não foi possível Alterar a foto';
-				});
-				
-			}else{
-				recursoFoto.save($scope.foto,function() {
-						$scope.foto = {};
-						$scope.mensagem = 'Foto cadastrada com sucesso';
-					}, function(erro) {
-						console.log(erro);
-						$scope.mensagem = 'Não foi possível cadastrar a foto';
-					});
-			}
+			cadastroDeFotos.cadastrar($scope.foto)
+			.then(function(dados){
+				$scope.mensagem = dados.mensagem;
+				if(dados.inclusao) $scope.foto = {};
+				$scope.focado = true;
+			}).catch(function(dados){
+				$scope.mensagem = dados.mensagem;
+			});
         }
     };
 });
